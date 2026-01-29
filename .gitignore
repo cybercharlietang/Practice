@@ -1,0 +1,14 @@
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Pytest
+.pytest_cache/
+__pycache__/
+*.pyc
+
+# IDE
+.idea/
+*.swp
+*.swo
