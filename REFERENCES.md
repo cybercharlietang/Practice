@@ -114,3 +114,40 @@
 - Avoid slicing inside loops → prefix sums or two-pointer
 - Prefer `in set`/`in dict` over `in list`
 - Use indices in deques for sliding window correctness
+
+---
+
+## CodeSignal Practice Repo Reference
+
+**Location:** `/home/charlie/CodeSignal_Practice_Industry_Coding_Framework`
+
+### Example Problem: File Storage System
+
+**Level 1 — Basic CRUD:**
+- `FILE_UPLOAD(file_name, size)` — add file, error if exists
+- `FILE_GET(file_name)` — return size or None
+- `FILE_COPY(source, dest)` — copy file, overwrite if dest exists
+
+**Level 2 — Search/Sort:**
+- `FILE_SEARCH(prefix)` — top 10 files by prefix, sorted by size desc then name
+
+**Level 3 — Timestamps & TTL:**
+- `FILE_UPLOAD_AT(timestamp, file_name, size, ttl)` — file expires after ttl seconds
+- `FILE_GET_AT(timestamp, file_name)` — check if file still alive
+- `FILE_SEARCH_AT(timestamp, prefix)` — only return alive files
+
+**Level 4 — State Management:**
+- `ROLLBACK(timestamp)` — restore state to earlier time, recalculate TTLs
+
+### Available Libraries (pre-imported)
+```python
+import sortedcontainers  # SortedList, SortedDict
+import numpy
+from collections import OrderedDict
+```
+
+### Key Patterns to Practice
+1. Dict-based storage with metadata (size, timestamp, ttl)
+2. Sorting with custom keys: `sorted(items, key=lambda x: (-x.size, x.name))`
+3. TTL/expiration checks: `current_time < upload_time + ttl`
+4. State snapshots for rollback

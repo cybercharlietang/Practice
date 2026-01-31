@@ -2,6 +2,18 @@
 
 You are an assistant to me and this file provides you with the baseline context for the project.
 
+## Session Startup (REQUIRED)
+
+**At the start of EVERY new session, read these files before doing anything else:**
+
+1. `LESSONS.md` — Key learnings and context
+2. `REFERENCES.md` — CodeSignal format details
+3. `STRENGTHS&WEAKNESSES.md` — Current skill assessment
+4. `TODO.md` — Training plan and progress
+5. `CHEATSHEET.md` — Coding quick reference
+
+**Keep these files updated throughout and at end of session.**
+
 ## Project Goal
 
 The goal of this project is to help me prepare for CodeSignal assessments. You should look to create a training program, which can consist, but not limited to, of problem sets and mock interviews. I want you to keep track of my STRENGTHS and WEAKNESSES in a specific markdown file after each session. I want you to keep track of the subjects and concepts we have gone through in another markdown file.
@@ -37,13 +49,20 @@ In the end I want to be able to complete all the questions on the online assessm
 - Create a separate folder for mock interviews and assessments, index these to keep track of progress.
 - Ask me for feedback and the difficulty after each problem set and mock test, and use the feedback to adjust the difficulty and the area to target. 
 - Ask me for my opinion on what we should do next after each session.
+- At the start of each session, whether interview, assessment or practice set, give the details for the workflow (where to put in the code, how to run the tests, run to verify answers).
 
 ## Problem Sets
 More freedom here. For targeted practicing weaknesses, test newly gained knowledge or for problem sessions. You are allowed to give hints when asked or notice when I am stuck.
+-Make sure, afterwards to show what techniques or tricks you wanted to teach or would have been the optimal coding solution.
 
 ## Mock Test/Assessment, Interview
 - Mock Test: Fixed format, really to benchmark my ability as accurately as possible and identify my strengths and weaknesses. 4 Problems, to do in 90 minutes. No hints or help allowed while doing the test. Create a file with the problem description. One file where I have to write the code, and test against test cases. Verify by testing against all test cases. If and only if passes all the test cases, get full points. Create a file with all the test cases to test (inputs and solutions). Create a final file with the solutions. Put each assessment in its own folder.
 - Mock Interview: 60 minutes, test a broader range of subjects. Start with an empty .py file. Ask questions one by one, leave as much as you can to me, but when noticing I am stuck give help or hints. Create a solution file with the test cases and possible bugs. Not only grade on passing all the test cases, also code quality and reasoning. Put each interview in its own folder.
+-Make sure, afterwards to show what techniques or tricks you wanted to teach or would have been the optimal coding solution.
 
-## Iteration
-- Save all the relevant context under LESSONS.md. Have everything up to date such that the next version of you can pick up with enough context to proceed.
+## CHEATSHEET
+-Under CHEATSHEET.md give a list of useful 'tricks', algorithms and code shortcuts that will be useful on coding tests. Group them together by use cases.
+-Code shortcuts examples: "".join(list) for turning lists into strings, to generating lists using [x for x in list], to using Counter() for counting elements in a list or string, sorted(list, key=lambda x:(-x[1].x[0])) for sort list of tuples by attributes.
+-Algorithm examples: sliding window structures, hash tables (simple O(1) dict and set lookups)
+-When generating a problem set for practicing these concepts (note that this is not the case for mock interview and assessments, as here you test the recognition and implementation ability), give the relevant shortcuts and algorithm forms as hints or suggestion for use case before the start of problem set (perhaps include this in the README.md).'
+-Keep it concise, only add the most high impact things to know. Prefer simple solutions

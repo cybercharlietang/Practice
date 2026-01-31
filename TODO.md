@@ -9,74 +9,50 @@
 
 ## Phase 1: Problem Sets (Concept Building)
 
-### PS-01: String Manipulation
-- [ ] Reverse words in a sentence
-- [ ] Check palindrome (ignore case/spaces)
-- [ ] Count vowels/consonants
-- [ ] Interleave two strings
-- [ ] Compress string ("aabbb" → "a2b3")
+### PS-01: String Manipulation ✓ (2026-01-30, 1.5 hrs)
+- [x] Reverse words in a sentence
+- [x] Check palindrome (ignore case/spaces)
+- [x] Count vowels/consonants
+- [x] Interleave two strings
+- [x] Compress string ("aabbb" → "a2b3")
 
-### PS-02: Array Fundamentals
-- [ ] Remove duplicates (preserve order)
-- [ ] Rotate array by k positions
-- [ ] Find missing number in 1..n
-- [ ] Merge two sorted arrays
-- [ ] Move zeros to end
+### PS-02: Array Fundamentals ✓ (2026-01-30, 45 min)
+- [x] Remove duplicates (preserve order)
+- [x] Rotate array by k positions
+- [x] Find missing number in 1..n
+- [x] Merge two sorted arrays
+- [x] Move zeros to end
 
-### PS-03: Hash Tables & Counting
-- [ ] Two sum (return indices)
-- [ ] Group anagrams
-- [ ] First unique character
-- [ ] Most frequent element
-- [ ] Check if two strings are anagrams
+### PS-03: Hash Tables & Counting ✓ (2026-01-30, 45 min)
+- [x] Two sum (return indices)
+- [x] Group anagrams
+- [x] First unique character
+- [x] Most frequent element
+- [x] Check if two strings are anagrams
 
-### PS-04: Sliding Window
-- [ ] Maximum sum of k consecutive elements
-- [ ] Longest substring without repeating chars
-- [ ] Minimum window substring (simplified)
-- [ ] Count subarrays with sum = k
-- [ ] Sliding window maximum (using deque)
+### PS-04: Sliding Window ✓ (2026-01-30, 90 min)
+- [x] Maximum sum of k consecutive elements
+- [x] Longest substring without repeating chars
+- [x] Minimum window substring (simplified)
+- [x] Count subarrays with sum = k
+- [x] Sliding window maximum (using deque)
 
-### PS-05: Two Pointer
-- [ ] Valid palindrome with alphanumeric only
-- [ ] Container with most water (simplified)
-- [ ] Remove duplicates from sorted array (in-place)
-- [ ] Three sum (find triplets summing to zero)
-- [ ] Merge intervals
+### PS-05: Data Structures (Revised)
+- [ ] Stack operations (validate parentheses, min stack)
+- [ ] Queue operations (implement with stacks, circular queue)
+- [ ] Linked list basics (reverse, detect cycle)
+- [ ] Sorted set with bisect (insertion, range queries)
+- [ ] Class design: RangeCounter
 
-### PS-06: Heaps
-- [ ] Kth largest element in array
-- [ ] Kth largest in stream
-- [ ] Merge k sorted lists
-- [ ] Top k frequent elements
-- [ ] Streaming median (two heaps)
-
-### PS-07: Sorting & Binary Search
-- [ ] Custom sort by frequency
-- [ ] Sort by multiple criteria (stable)
-- [ ] Binary search insert position
-- [ ] Search in rotated sorted array
-- [ ] Find peak element
-
-### PS-08: Intervals
-- [ ] Merge overlapping intervals
-- [ ] Insert interval
-- [ ] Check if intervals overlap
-- [ ] Meeting rooms (can attend all?)
-- [ ] Meeting rooms II (min rooms needed)
-
-### PS-09: Class Design (Q3 Simulation)
+### PS-06: Class Design (Q3 Simulation)
 - [ ] Simple Counter class with statistics
 - [ ] LRU Cache (simplified)
 - [ ] Rate Limiter
 - [ ] Todo Manager with priorities
 - [ ] Event Scheduler with conflicts
 
-### PS-10: Graph Basics (Optional for ICA)
-- [ ] BFS shortest path in grid
-- [ ] DFS connected components
-- [ ] Detect cycle in directed graph
-- [ ] Topological sort
+### ~~PS-07 to PS-10: SKIPPED~~
+*Binary search, heaps, intervals, graphs — not needed for ICA*
 
 ---
 
@@ -93,9 +69,9 @@
 
 ## Progress Tracking
 
-### Current Phase: Setup
-- [ ] Complete PS-01 to establish baseline
-- [ ] Assess timing and accuracy
+### Current Phase: Phase 1 (Problem Sets)
+- [x] Complete PS-01 to establish baseline
+- [x] Assess timing and accuracy
 - [ ] Adjust difficulty based on results
 
 ### Completion Criteria
@@ -107,4 +83,7 @@
 ## Session Log
 | Date | Activity | Duration | Notes |
 |------|----------|----------|-------|
-| - | - | - | - |
+| 2026-01-30 | PS-01 Strings | 1.5 hrs | 28/28 passed, difficulty "about right", speed needs work |
+| 2026-01-30 | PS-02 Arrays | 45 min | 32/32 passed, hit target time, review mutation vs copy |
+| 2026-01-30 | PS-03 Hash Tables | 45 min | 27/27 passed, learned Counter/defaultdict |
+| 2026-01-30 | PS-04 Sliding Window | 90 min | 30/30 passed, solutions correct but suboptimal complexity |
