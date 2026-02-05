@@ -60,6 +60,55 @@
 - Never modify list while iterating — use list comprehension or iterate over copy
 - `sorted(a + b)` is O((n+m) log(n+m)); two-pointer merge is O(n+m)
 
+## Critical: Reference vs Copy for State Snapshots
+```python
+# WRONG — stores reference, backup changes when self.data changes
+self.backup[ts] = {"data": self.data}
+
+# RIGHT — stores independent copy
+import copy
+self.backup[ts] = {"data": copy.deepcopy(self.data)}
+```
+
+## Critical: Variable Shadowing in Loops
+```python
+# WRONG — loop variable 'key' overwrites function parameter 'key'
+def get_at(self, key: str, field: str, timestamp: int):
+    for key, expiry in self.expire.items():  # 'key' now refers to loop var!
+        ...
+    return self.data[key][field]  # BUG: 'key' is last loop value, not parameter
+
+# RIGHT — use different variable name
+def get_at(self, key: str, field: str, timestamp: int):
+    for k, expiry in self.expire.items():  # 'k' doesn't shadow 'key'
+        ...
+    return self.data[key][field]  # 'key' still refers to parameter
+```
+
+## Backup/Restore Pattern (L4)
+```python
+def backup(self, timestamp):
+    # Store REMAINING TTL, not absolute expiry
+    remaining_ttl = {k: {f: exp - timestamp for f, exp in fields.items() if exp > timestamp}
+                     for k, fields in self.expire.items()}
+    self.backups[timestamp] = {
+        "data": copy.deepcopy(self.data),
+        "remaining_ttl": remaining_ttl
+    }
+
+def restore(self, timestamp, timestamp_to_restore):
+    # Find latest backup <= timestamp_to_restore
+    backup_time = max(t for t in self.backups if t <= timestamp_to_restore)
+    backup = self.backups[backup_time]
+
+    # REPLACE state with deep copy
+    self.data = copy.deepcopy(backup["data"])
+
+    # RECALCULATE expiry times
+    self.expire = {k: {f: timestamp + rem for f, rem in fields.items()}
+                   for k, fields in backup["remaining_ttl"].items()}
+```
+
 ## ICA Mock Test Structure (from CodeSignal screenshots)
 - File structure: `tests/level_X_tests.py` (read-only), `sandbox_tests.py` (editable), `*_impl.py` (your code)
 - Uses Python `unittest` with `@timeout(seconds)` decorator

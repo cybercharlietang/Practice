@@ -158,7 +158,7 @@ class TestDataStructures(unittest.TestCase):
         rc = RecentCounter()
         self.assertEqual(rc.ping(1), 1)
         self.assertEqual(rc.ping(4000), 1)  # t=1 is outside [1000, 4000]
-        self.assertEqual(rc.ping(7000), 1)
+        self.assertEqual(rc.ping(7000), 2)  # t=4000 is inside [4000, 7000] (inclusive)
 
     def test_recent_counter_dense(self):
         rc = RecentCounter()
@@ -166,7 +166,7 @@ class TestDataStructures(unittest.TestCase):
         self.assertEqual(rc.ping(2), 2)
         self.assertEqual(rc.ping(3), 3)
         self.assertEqual(rc.ping(3000), 4)
-        self.assertEqual(rc.ping(3001), 4)
+        self.assertEqual(rc.ping(3001), 5)  # t=1 is inside [1, 3001] (inclusive)
 
 
 if __name__ == '__main__':

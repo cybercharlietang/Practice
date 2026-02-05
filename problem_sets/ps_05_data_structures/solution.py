@@ -7,7 +7,6 @@ import bisect
 from webbrowser import open_new
 from collections import defaultdict
 
-
 # Provided for linked list problems
 class ListNode:
     def __init__(self, val=0, next=None):
@@ -87,11 +86,14 @@ def reverse_linked_list(head: ListNode) -> ListNode:
     :param head: The head node of the list, or None if empty.
     :return: The new head of the reversed list, or None if empty.
     """
-    new_head=head.next
-    new_val=head.val
-    head.val=new_head
-    head.val=new_val
-    return head.val
+    prev = None                                                                                                            
+    curr = head                                                                                                            
+    while curr:                                                                                                            
+        next_node = curr.next                                                                                              
+        curr.next = prev                                                                                                   
+        prev = curr                                                                                                        
+        curr = next_node                                                                                                   
+    return prev
 
 
 
@@ -102,8 +104,7 @@ class SortedList:
     """
 
     def __init__(self):
-        # TODO: Implement
-        pass
+        self.list=[]
 
     def insert(self, val: int) -> None:
         """
@@ -111,8 +112,9 @@ class SortedList:
 
         :param val: int
         """
-        # TODO: Implement
-        pass
+        bisect.insort(self.list, val)
+        
+            
 
     def remove(self, val: int) -> bool:
         """
@@ -121,19 +123,23 @@ class SortedList:
         :param val: int
         :return: True if val was found and removed, False otherwise.
         """
-        # TODO: Implement
-        pass
+        for i in range(len(self.list)):
+            if self.list[i]==val:
+                self.list.pop(i)
+                return True
+        return False
 
     def count_range(self, low: int, high: int) -> int:
         """
-        Counts elements in the inclusive range [low, high].
-
+        Counts elements in the inclusive range [low, high]
         :param low: int, lower bound (inclusive)
         :param high: int, upper bound (inclusive)
         :return: Number of elements x where low <= x <= high.
         """
-        # TODO: Implement
-        pass
+        left=bisect.bisect_left(self.list, low)
+        right=bisect.bisect_right(self.list, high)
+        return right-left
+            
 
     def get_all(self) -> list:
         """
@@ -141,8 +147,7 @@ class SortedList:
 
         :return: List of all elements in sorted order.
         """
-        # TODO: Implement
-        pass
+        return self.list
 
 
 class RecentCounter:
@@ -151,8 +156,7 @@ class RecentCounter:
     """
 
     def __init__(self):
-        # TODO: Implement
-        pass
+        self.requests=[]
 
     def ping(self, t: int) -> int:
         """
@@ -162,5 +166,8 @@ class RecentCounter:
         :param t: int, timestamp in milliseconds. Calls are strictly increasing.
         :return: Number of requests in the last 3000ms window.
         """
-        # TODO: Implement
-        pass
+        
+        self.requests.append(t)
+        while self.requests[0]<t-3000:
+            self.requests.pop(0)
+        return len(self.requests)

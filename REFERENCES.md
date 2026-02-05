@@ -119,9 +119,9 @@
 
 ## CodeSignal Practice Repo Reference
 
-**Location:** `/home/charlie/CodeSignal_Practice_Industry_Coding_Framework`
+**Location:** `/home/charlie/practice/example_tests/CodeSignal_Practice_Industry_Coding_Framework/`
 
-### Example Problem: File Storage System
+### File Storage System (4 levels, 32 tests)
 
 **Level 1 — Basic CRUD:**
 - `FILE_UPLOAD(file_name, size)` — add file, error if exists
@@ -151,3 +151,87 @@ from collections import OrderedDict
 2. Sorting with custom keys: `sorted(items, key=lambda x: (-x.size, x.name))`
 3. TTL/expiration checks: `current_time < upload_time + ttl`
 4. State snapshots for rollback
+
+---
+
+## LibreSignal Practice Framework
+
+**Location:** `/home/charlie/practice/example_tests/LibreSignal/`
+
+### Why LibreSignal is More Realistic
+| Feature | My ICA-001 | LibreSignal |
+|---------|------------|-------------|
+| Timestamps in operations | No | Yes (every operation) |
+| Scheduled future events | No | Yes (cashback at t+24hrs) |
+| Historical queries | No | Yes (`get_balance(ts, time_at)`) |
+| Output formatting | Simple | Complex (`"account1(500)"`) |
+| State restoration | Simple snapshot | TTL recalculation required |
+
+### LibreSignal Problem Patterns
+
+**Bank System (4 levels):**
+1. L1: `create_account`, `deposit`, `transfer` — basic CRUD
+2. L2: `top_spenders` — ranking with formatted output
+3. L3: `pay`, `get_payment_status` — cashback at future timestamp
+4. L4: `merge_accounts`, `get_balance` — merge state, historical balance
+
+**In-Memory Database (4 levels):**
+1. L1: `set`, `get`, `delete` — key→field→value storage
+2. L2: `scan`, `scan_by_prefix` — formatted output `"field(value)"`
+3. L3: `*_at`, `*_at_with_ttl` — TTL per field (not per record)
+4. L4: `backup`, `restore` — snapshot with remaining TTL, recalculate on restore
+
+### L4 Difficulty: State Management
+
+**Common L4 patterns requiring special care:**
+1. **Backup/Restore**: Must use `copy.deepcopy()`, not reference assignment
+2. **TTL Recalculation**: Store remaining TTL, recalculate `new_expiry = restore_time + remaining`
+3. **Historical Queries**: Track state over time, not just current state
+4. **Merge Operations**: Redirect references (payments, cashbacks) to merged account
+
+### Test Format
+```bash
+cd /home/charlie/practice/example_tests/LibreSignal
+pytest Questions/bank_system/test_bank_system.py::TestLevel1 -v
+pytest Questions/in_memory_database/test_in_memory_database.py::TestLevel1 -v
+```
+
+---
+
+## File Storage System (CodeSignal Practice)
+
+**Location:** `/home/charlie/practice/example_tests/CodeSignal_Practice_Industry_Coding_Framework/practice_assessments/file_storage/`
+
+### Problem Structure
+**Level 1 — Basic CRUD (8 tests):**
+- `FILE_UPLOAD(file_name, size)` → `"uploaded {file_name}"`, error if exists
+- `FILE_GET(file_name)` → `"got {file_name}"` or `"file not found"`
+- `FILE_COPY(source, dest)` → `"copied {source} to {dest}"`, overwrites dest
+
+**Level 2 — Search (7 tests):**
+- `FILE_SEARCH(prefix)` → `"found [{file1}, {file2}, ...]"`
+  - Sorted by size descending, then name ascending
+  - Maximum 10 results
+
+**Level 3 — Timestamps & TTL (8 tests):**
+- `FILE_UPLOAD_AT(timestamp, file_name, size, ttl?)` → `"uploaded at {file_name}"`
+- `FILE_GET_AT(timestamp, file_name)` → `"got at {file_name}"` or `"file not found"`
+- `FILE_COPY_AT(timestamp, source, dest)` → `"copied at {source} to {dest}"`
+- `FILE_SEARCH_AT(timestamp, prefix)` → `"found at [{file1}, ...]"`
+- TTL: File available during `[timestamp, timestamp + ttl)`
+
+**Level 4 — Rollback (5 tests):**
+- `ROLLBACK(timestamp)` → `"rollback to {timestamp}"`
+  - Restores state to given timestamp
+  - Discards operations after rollback point
+  - Recalculates TTLs based on new timeline
+
+### Test Format
+```bash
+cd /home/charlie/practice/example_tests/CodeSignal_Practice_Industry_Coding_Framework/practice_assessments/file_storage
+pytest test_simulation.py -v
+pytest test_simulation.py::TestLevel1 -v
+pytest test_simulation.py::TestLevel2 -v
+pytest test_simulation.py::TestLevel3 -v
+pytest test_simulation.py::TestLevel4 -v
+```
